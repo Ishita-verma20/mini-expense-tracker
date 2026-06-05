@@ -1,7 +1,7 @@
 "use client";
 
 import { format } from "date-fns";
-import { Pencil, Trash2, AlertTriangle } from "lucide-react";
+import { Edit2, Trash2, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { formatINR } from "@/lib/currency";
@@ -75,7 +75,7 @@ export function ExpenseList({
                 onClick={() => onEdit(expense)}
                 aria-label="Edit expense"
               >
-                <Pencil className="h-4 w-4" />
+                <Edit2 className="h-4 w-4" />
               </Button>
               <Button
                 variant="outline"
