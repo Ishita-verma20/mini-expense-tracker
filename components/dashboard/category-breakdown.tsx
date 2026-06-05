@@ -52,13 +52,13 @@ export function CategoryBreakdown({
             <div
               key={cat}
               className={`flex items-center justify-between rounded-md px-2 py-1.5 text-sm ${
-                exceeded ? "bg-amber-50 dark:bg-amber-950/30" : ""
+                exceeded ? "bg-red-50 dark:bg-red-950/30" : ""
               }`}
             >
               <span className="flex items-center gap-2 font-medium">
                 {cat}
                 {exceeded && (
-                  <AlertTriangle className="h-3.5 w-3.5 text-amber-600" />
+                  <AlertTriangle className="h-3.5 w-3.5 text-red-600" />
                 )}
               </span>
               <div className="text-right">
