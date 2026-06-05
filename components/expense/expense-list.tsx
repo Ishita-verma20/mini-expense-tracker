@@ -57,7 +57,7 @@ export function ExpenseList({
                 </span>
                 <Badge variant="secondary">{expense.category}</Badge>
                 {exceeded && (
-                  <Badge variant="warning" className="gap-1">
+                  <Badge variant="destructive" className="gap-1">
                     <AlertTriangle className="h-3 w-3" />
                     Over budget
                   </Badge>
