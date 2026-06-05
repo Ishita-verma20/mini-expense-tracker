@@ -47,7 +47,7 @@ export function ExpenseList({
             key={expense.id}
             className={cn(
               "flex flex-col gap-3 rounded-lg border bg-card p-4 sm:flex-row sm:items-center sm:justify-between",
-              exceeded && "border-amber-400 bg-amber-50/50 dark:bg-amber-950/20"
+              exceeded && "border-red-500"
             )}
           >
             <div className="flex-1 space-y-1">
