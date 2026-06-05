@@ -1,0 +1,23 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Expense {
+  id        String   @id @default(cuid())
+  amount    Float
+  category  String
+  date      DateTime
+  note      String?
+  createdAt DateTime @default(now())
+}
+
+model Budget {
+  id          String @id @default(cuid())
+  category    String @unique
+  limitAmount Float
+}
