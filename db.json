@@ -1,0 +1,35 @@
+{
+  "expenses": [
+    {
+      "id": "09a212cd-bfd0-4429-af5e-51ff3f2cdf27",
+      "amount": 500,
+      "category": "Bills",
+      "date": "2026-06-05T00:00:00.000Z",
+      "note": "bill\n",
+      "createdAt": "2026-06-05T17:16:39.723Z"
+    },
+    {
+      "id": "60b4daca-0db3-4da3-b834-bf9121ecd27c",
+      "amount": 5005,
+      "category": "Transport",
+      "date": "2026-06-05T00:00:00.000Z",
+      "note": null,
+      "createdAt": "2026-06-05T17:17:31.577Z"
+    },
+    {
+      "id": "8c16647a-dba1-48e4-8042-bf3945a27442",
+      "amount": 3000,
+      "category": "Transport",
+      "date": "2026-06-05T00:00:00.000Z",
+      "note": null,
+      "createdAt": "2026-06-05T17:28:35.608Z"
+    }
+  ],
+  "budgets": [
+    {
+      "id": "906961f2-f27b-4fed-beec-6864993c9b7b",
+      "category": "Transport",
+      "limitAmount": 5000
+    }
+  ]
+}
