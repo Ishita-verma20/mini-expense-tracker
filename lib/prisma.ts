@@ -14,8 +14,14 @@ function createPrismaClient() {
     return new PrismaClient({ adapter });
   }
 
-  // For other databases (e.g. Postgres), override the datasource at runtime.
-  return new PrismaClient({ datasources: { db: { url: dbUrl } } });
+  // For Postgres, use datasource override to change from sqlite schema to postgres at runtime.
+  return new PrismaClient({
+    datasources: {
+      db: {
+        url: dbUrl,
+      },
+    },
+  });
 }
 
 export const prisma = globalForPrisma.prisma ?? createPrismaClient();

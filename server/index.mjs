@@ -1,7 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
-import { PrismaClient } from "@prisma/client";
+import jsonDb from "./jsonDb.mjs";
 import { z } from "zod";
 import { endOfDay, format, startOfMonth, subMonths } from "date-fns";
 
@@ -9,7 +9,14 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const prisma = new PrismaClient();
+const useJson = process.env.USE_JSON_DB === "true" || (process.env.DATABASE_URL && process.env.DATABASE_URL.endsWith('.json'));
+let prisma;
+if (useJson) {
+  prisma = jsonDb;
+} else {
+  const { PrismaClient } = await import("@prisma/client");
+  prisma = new PrismaClient();
+}
 
 const EXPENSE_CATEGORIES = [
   "Food",
