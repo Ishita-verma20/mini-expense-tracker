@@ -12,6 +12,7 @@ import {
 } from "recharts";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
+import { apiUrl } from "@/lib/api";
 import { formatINR } from "@/lib/currency";
 import type { MonthlySpending } from "@/types";
 
@@ -23,7 +24,7 @@ export function MonthlyBarChart() {
   useEffect(() => {
     async function fetchMonthly() {
       try {
-        const res = await fetch("/api/analytics/monthly");
+        const res = await fetch(apiUrl("/api/analytics/monthly"));
         if (!res.ok) throw new Error("Failed");
         const json = await res.json();
         setData(json);

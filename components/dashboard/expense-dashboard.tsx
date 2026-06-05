@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { SummaryCards } from "@/components/dashboard/summary-cards";
 import { CategoryBreakdown } from "@/components/dashboard/category-breakdown";
+import { apiUrl } from "@/lib/api";
 import { ExpenseFilters } from "@/components/dashboard/expense-filters";
 import { BudgetSettings } from "@/components/dashboard/budget-settings";
 import { CategoryPieChart } from "@/components/charts/category-pie-chart";
@@ -71,10 +72,10 @@ export function ExpenseDashboard() {
     setError(null);
     try {
       const [expRes, sumRes, sumMonthRes, budRes] = await Promise.all([
-        fetch(`/api/expenses?${queryString}`),
-        fetch(`/api/summary?${queryString}`),
-        fetch("/api/summary?dateRange=this-month"),
-        fetch("/api/budgets"),
+        fetch(apiUrl(`/api/expenses?${queryString}`)),
+        fetch(apiUrl(`/api/summary?${queryString}`)),
+        fetch(apiUrl("/api/summary?dateRange=this-month")),
+        fetch(apiUrl("/api/budgets")),
       ]);
 
       if (!expRes.ok || !sumRes.ok) {
@@ -107,8 +108,8 @@ export function ExpenseDashboard() {
     setIsSubmitting(true);
     try {
       const url = editingExpense
-        ? `/api/expenses/${editingExpense.id}`
-        : "/api/expenses";
+        ? apiUrl(`/api/expenses/${editingExpense.id}`)
+        : apiUrl("/api/expenses");
       const method = editingExpense ? "PUT" : "POST";
 
       const res = await fetch(url, {
@@ -137,7 +138,7 @@ export function ExpenseDashboard() {
     if (!deleteTarget) return;
     setIsSubmitting(true);
     try {
-      const res = await fetch(`/api/expenses/${deleteTarget.id}`, {
+      const res = await fetch(apiUrl(`/api/expenses/${deleteTarget.id}`), {
         method: "DELETE",
       });
       if (!res.ok) throw new Error("Failed to delete");

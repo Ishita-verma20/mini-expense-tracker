@@ -27,6 +27,7 @@ import {
   type BudgetFormValues,
 } from "@/lib/validations";
 import { formatINR } from "@/lib/currency";
+import { apiUrl } from "@/lib/api";
 import { EXPENSE_CATEGORIES, type Budget } from "@/types";
 
 interface BudgetSettingsProps {
@@ -54,7 +55,7 @@ export function BudgetSettings({ budgets, onRefresh }: BudgetSettingsProps) {
   const onSubmit = async (data: BudgetFormValues) => {
     setLoading(true);
     try {
-      const res = await fetch("/api/budgets", {
+      const res = await fetch(apiUrl("/api/budgets"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
@@ -72,7 +73,7 @@ export function BudgetSettings({ budgets, onRefresh }: BudgetSettingsProps) {
 
   const handleDelete = async (cat: string) => {
     try {
-      const res = await fetch(`/api/budgets?category=${encodeURIComponent(cat)}`, {
+      const res = await fetch(apiUrl(`/api/budgets?category=${encodeURIComponent(cat)}`), {
         method: "DELETE",
       });
       if (!res.ok) throw new Error("Failed to delete");

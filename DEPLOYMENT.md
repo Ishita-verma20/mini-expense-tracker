@@ -12,12 +12,21 @@ High-level steps
    - Choose plan (free/managed) and create the DB
    - After creation, copy the DATABASE_URL connection string (format: `postgres://user:pass@host:port/dbname`)
 
-2) Configure Vercel
-   - In your Vercel dashboard, import the GitHub repo and set project to the `expense-tracker` repo
-   - In Project Settings -> Environment Variables, add `DATABASE_URL` and paste the Render Postgres connection string
+2) Configure Render Postgres and Backend Service
+   - In the Render dashboard, create a new PostgreSQL database and copy the generated `DATABASE_URL`.
+   - Create a new Web Service in Render.
+   - Choose "Node" and connect the same GitHub repo.
+   - Set the root directory to `server`.
+   - Use `npm install` as the build command and `npm run start` as the start command.
+   - Add the same `DATABASE_URL` environment variable to the Render service.
+
+3) Configure Vercel
+   - In your Vercel dashboard, import the GitHub repo and set project to the `expense-tracker` repo.
+   - In Project Settings -> Environment Variables, add `DATABASE_URL` and paste the Render Postgres connection string.
+   - Add `NEXT_PUBLIC_API_BASE_URL` with the Render service URL, e.g. `https://your-backend-service.onrender.com`.
    - Ensure `NODE_ENV` is set to `production` (Vercel sets this automatically on production deploys).
 
-3) Update Prisma provider before pushing production schema
+4) Update Prisma provider before pushing production schema
    - Edit `prisma/schema.prisma` and ensure `provider = "postgresql"`.
    - Commit that change.
    - Set `DATABASE_URL` in your local `.env` to your Render Postgres connection string when testing locally.
@@ -53,4 +62,12 @@ npx prisma db push --preview-feature
 # set DATABASE_URL=file:./dev.db (or unset) and run:
 npx prisma generate
 
-If you want me to scaffold an Express backend on `server/` and prepare Render service files, say so and I'll create the files and commit them.
+The repo now includes a lightweight Express backend in `server/` and a `render.yaml` service definition for Render.
+
+Local testing steps for the backend service:
+
+cd server
+npm install
+npm run start
+
+Then set `NEXT_PUBLIC_API_BASE_URL` to `http://localhost:10000` for the frontend to call it locally.
